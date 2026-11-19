@@ -54,10 +54,11 @@ function badge(text, cls) {
   return s;
 }
 
-function trophyCard(t) {
+function trophyCard(t, featured) {
   const masked = isMasked(t);
   const art = document.createElement('article');
   art.className = 'trophy' + (earned.has(t.id) ? ' earned' : '') + (masked ? ' masked' : '');
+  if (featured) art.id = 'featured-trophy';
   const box = document.createElement('input');
   box.type = 'checkbox';
   box.checked = earned.has(t.id);
@@ -134,6 +135,18 @@ function renderProgress() {
 function renderChecklist() {
   checklistEl.replaceChildren();
   let shown = 0;
+  // Deep link (?open=<id>): show that trophy's guide first, above the list.
+  const featured = openId ? trophies.find(t => t.id === openId) : null;
+  if (featured) {
+    const head = document.createElement('div');
+    head.className = 'stage-head';
+    const h = document.createElement('h2');
+    h.textContent = 'Featured guide';
+    const p = document.createElement('p');
+    p.textContent = 'Linked trophy — its guide is open below. The full checklist follows.';
+    head.append(h, p);
+    checklistEl.append(head, trophyCard(featured, true));
+  }
   for (const st of STAGES) {
     const list = trophies.filter(t => t.stage === st.n && matches(t));
     if (!list.length) continue;
