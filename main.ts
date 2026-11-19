@@ -13,6 +13,11 @@
 // Serve it locally with `node serve.ts`, then open http://localhost:8080.
 // Outside the grader's container, MAKEFUN_OUTPUT_DIR stands in for /output:
 //   mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
+//
+// Rebuilt by the recorded build agent (2026-11-19): app/ is now a full guide and tracker —
+// all 55 trophies with cited guides in app/data/trophies.json, a roadmap to the platinum,
+// a missable-trophy banner, kind/grade/search filters, a spoiler setting, and export/import
+// of saved progress — with 4 real headless-Chrome screenshots in screenshots/.
 
 import { cpSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
